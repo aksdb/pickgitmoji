@@ -1,0 +1,63 @@
+object frmMain: TfrmMain
+  Left = 1530
+  Height = 240
+  Top = 250
+  Width = 320
+  BorderStyle = bsToolWindow
+  Caption = 'Pick gitmoji'
+  ClientHeight = 240
+  ClientWidth = 320
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  object edSearch: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 29
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    OnChange = edSearchChange
+    OnKeyDown = edSearchKeyDown
+    TabOrder = 0
+  end
+  object lbGitmojis: TListBox
+    AnchorSideLeft.Control = edSearch
+    AnchorSideTop.Control = edSearch
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = edSearch
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = cbCopyEmoji
+    Left = 8
+    Height = 156
+    Top = 45
+    Width = 304
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Bottom = 8
+    ItemHeight = 48
+    OnDrawItem = lbGitmojisDrawItem
+    OnKeyDown = lbGitmojisKeyDown
+    ScrollWidth = 302
+    Style = lbOwnerDrawFixed
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object cbCopyEmoji: TCheckBox
+    AnchorSideLeft.Control = edSearch
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 209
+    Width = 196
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Bottom = 8
+    Caption = 'Copy &emoji (instead of code)'
+    Checked = True
+    State = cbChecked
+    TabOrder = 2
+  end
+end
