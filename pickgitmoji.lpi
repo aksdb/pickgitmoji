@@ -13,6 +13,9 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
+      <Resources Count="1">
+        <Resource_0 FileName="data/gitmojis.json" Type="RCDATA" ResourceName="GITMOJIS"/>
+      </Resources>
     </General>
     <BuildModes Count="1">
       <Item1 Name="Default" Default="True"/>

@@ -107,7 +107,7 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
-  fs: TFileStream;
+  fs: TResourceStream;
   parser: TJSONParser;
   jsondata: TJSONData;
   destreamer: TJSONDeStreamer;
@@ -118,7 +118,7 @@ begin
   JSONPropStorage1.JSONFileName := GetAppConfigFile(False);
 
   try
-    fs := TFileStream.Create('gitmojis.json', fmOpenRead);
+    fs := TResourceStream.Create(HINSTANCE, 'GITMOJIS', RT_RCDATA);
     parser := TJSONParser.Create(fs);
     jsondata := parser.Parse;
     destreamer := TJSONDeStreamer.Create(nil);

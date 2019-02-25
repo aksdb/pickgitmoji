@@ -1,0 +1,1 @@
+Gitmojis are taken from https://github.com/carloscuesta/gitmoji.
