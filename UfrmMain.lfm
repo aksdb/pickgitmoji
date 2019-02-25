@@ -9,6 +9,7 @@ object frmMain: TfrmMain
   ClientWidth = 320
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  LCLVersion = '2.1.0.0'
   object edSearch: TEdit
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner

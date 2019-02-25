@@ -1,7 +1,6 @@
 unit UfrmMain;
 
 {$mode objfpc}{$H+}
-{$MODESWITCH ADVANCEDRECORDS}
 
 interface
 
@@ -140,30 +139,20 @@ begin
 end;
 
 type
-  TMatch = record
+  TMatch = class
     Count: Integer;
     Gitmoji: TGitmoji;
-    class operator <(const AMatch1, AMatch2: TMatch): Boolean;
-    class operator =(const AMatch1, AMatch2: TMatch): Boolean;
   end;
-
-class operator TMatch.<(const AMatch1, AMatch2: TMatch): Boolean;
-begin
-  Result := AMatch1.Count < AMatch2.Count;
-end;
-
-class operator TMatch.=(const AMatch1, AMatch2: TMatch): Boolean;
-begin
-  Result := (AMatch1.Count = AMatch2.Count) and (AMatch1.Gitmoji = AMatch2.Gitmoji);
-end;
 
 function CompareMatches(const AMatch1, AMatch2: TMatch): Integer;
 begin
-  Result := AMatch2.Count - AMatch1.Count;
+  Result := AMatch1.Count - AMatch2.Count;
+  if Result = 0 then
+    Result := CompareStr(AMatch1.Gitmoji.FName, AMatch2.Gitmoji.FName);
 end;
 
 type
-  TMatches = specialize TFPGList<TMatch>;
+  TMatches = specialize TFPGObjectList<TMatch>;
 
 procedure TfrmMain.edSearchChange(Sender: TObject);
 var
@@ -173,7 +162,6 @@ var
   matches: TMatches;
   match: TMatch;
 begin
-  matches := TMatches.Create;
   s := Trim(AnsiLowerCase(edSearch.Text));
   token := s.Split(' ');
   lbGitmojis.Items.BeginUpdate;
@@ -184,6 +172,7 @@ begin
       lbGitmojis.Items.AddObject('', FTagData[i].Gitmoji);
   end else
   begin
+    matches := TMatches.Create;
     for i := 0 to Length(FTagData) - 1 do
     begin
       matchCount := 0;
@@ -194,19 +183,19 @@ begin
 
       if matchCount > 0 then
       begin
+        match := TMatch.Create;
         match.Count := matchCount;
         match.Gitmoji := FTagData[i].Gitmoji;
-        if matchCount > 0 then
-          matches.Add(match);
+        matches.Add(match);
       end;
     end;
 
     matches.Sort(@CompareMatches);
     for match in matches do
       lbGitmojis.Items.AddObject('', match.Gitmoji);
+    matches.Free;
   end;
   lbGitmojis.Items.EndUpdate;
-  matches.Free;
 end;
 
 procedure TfrmMain.edSearchKeyDown(Sender: TObject; var Key: Word;
