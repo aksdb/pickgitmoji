@@ -257,6 +257,9 @@ begin
     Top := Screen.Height - Height
   else if Top < 0 then
     Top := 0;
+
+  edSearch.Text := '';
+  edSearchChange(Sender);
 end;
 
 procedure TfrmMain.JSONPropStorage1RestoreProperties(Sender: TObject);
