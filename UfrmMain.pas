@@ -5,7 +5,8 @@ unit UfrmMain;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Types, fgl;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
+  Menus, Types, fgl;
 
 type
 
@@ -45,16 +46,23 @@ type
     cbCopyEmoji: TCheckBox;
     edSearch: TEdit;
     lbGitmojis: TListBox;
+    mnuExit: TMenuItem;
+    PopupMenu1: TPopupMenu;
+    TrayIcon1: TTrayIcon;
     procedure edSearchChange(Sender: TObject);
     procedure edSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure lbGitmojisKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure mnuExitClick(Sender: TObject);
+    procedure TrayIcon1Click(Sender: TObject);
   private
     FGitmojiData: TGitmojiData;
     FTagData: TTagData;
@@ -210,9 +218,24 @@ begin
   end;
 end;
 
+procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  CloseAction := caHide;
+end;
+
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FGitmojiData);
+end;
+
+procedure TfrmMain.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_ESCAPE then
+  begin
+    Key := 0;
+    Hide;
+  end;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -267,6 +290,19 @@ begin
       Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FCode;
     Hide;
   end;
+end;
+
+procedure TfrmMain.mnuExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmMain.TrayIcon1Click(Sender: TObject);
+begin
+  if Visible then
+    Hide
+  else
+    Show;
 end;
 
 function TfrmMain.DetermineFontSize(ACanvas: TCanvas; AHeight: Integer): Integer;

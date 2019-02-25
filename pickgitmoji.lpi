@@ -39,6 +39,7 @@
         <Filename Value="UfrmMain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmMain"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit1>
     </Units>

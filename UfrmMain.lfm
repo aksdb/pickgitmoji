@@ -7,8 +7,11 @@ object frmMain: TfrmMain
   Caption = 'Pick gitmoji'
   ClientHeight = 240
   ClientWidth = 320
+  KeyPreview = True
+  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   object edSearch: TEdit
     AnchorSideLeft.Control = Owner
@@ -60,5 +63,21 @@ object frmMain: TfrmMain
     Checked = True
     State = cbChecked
     TabOrder = 2
+  end
+  object TrayIcon1: TTrayIcon
+    PopUpMenu = PopupMenu1
+    Hint = 'Pick Gitmoji'
+    Visible = True
+    OnClick = TrayIcon1Click
+    Left = 224
+    Top = 56
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 224
+    Top = 112
+    object mnuExit: TMenuItem
+      Caption = 'E&xit'
+      OnClick = mnuExitClick
+    end
   end
 end
