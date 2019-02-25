@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Menus, Types, fgl;
+  Menus, JSONPropStorage, IDEWindowIntf, Types, fgl;
 
 type
 
@@ -45,6 +45,7 @@ type
   TfrmMain = class(TForm)
     cbCopyEmoji: TCheckBox;
     edSearch: TEdit;
+    JSONPropStorage1: TJSONPropStorage;
     lbGitmojis: TListBox;
     mnuExit: TMenuItem;
     PopupMenu1: TPopupMenu;
@@ -57,6 +58,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure JSONPropStorage1RestoreProperties(Sender: TObject);
+    procedure JSONPropStorage1SavingProperties(Sender: TObject);
     procedure lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure lbGitmojisKeyDown(Sender: TObject; var Key: Word;
@@ -112,6 +115,8 @@ var
   i, j, off: Integer;
   tags1, tags2: array of string;
 begin
+  JSONPropStorage1.JSONFileName := GetAppConfigFile(False);
+
   try
     fs := TFileStream.Create('gitmojis.json', fmOpenRead);
     parser := TJSONParser.Create(fs);
@@ -234,7 +239,7 @@ begin
   if Key = VK_ESCAPE then
   begin
     Key := 0;
-    Hide;
+    Close;
   end;
 end;
 
@@ -252,6 +257,20 @@ begin
     Top := Screen.Height - Height
   else if Top < 0 then
     Top := 0;
+end;
+
+procedure TfrmMain.JSONPropStorage1RestoreProperties(Sender: TObject);
+begin
+  Width := StrToInt(JSONPropStorage1.StoredValue['Width']);
+  Height := StrToInt(JSONPropStorage1.StoredValue['Height']);
+  cbCopyEmoji.Checked := StrToBool(JSONPropStorage1.StoredValue['CopyEmoji']);
+end;
+
+procedure TfrmMain.JSONPropStorage1SavingProperties(Sender: TObject);
+begin
+  JSONPropStorage1.StoredValue['Width'] := IntToStr(Width);
+  JSONPropStorage1.StoredValue['Height'] := IntToStr(Height);
+  JSONPropStorage1.StoredValue['CopyEmoji'] := BoolToStr(cbCopyEmoji.Checked, True);
 end;
 
 procedure TfrmMain.lbGitmojisDrawItem(Control: TWinControl; Index: Integer;

@@ -80,4 +80,24 @@ object frmMain: TfrmMain
       OnClick = mnuExitClick
     end
   end
+  object JSONPropStorage1: TJSONPropStorage
+    StoredValues = <    
+      item
+        Name = 'Width'
+        Value = '320'
+      end    
+      item
+        Name = 'Height'
+        Value = '240'
+      end    
+      item
+        Name = 'CopyEmoji'
+        Value = 'true'
+      end>
+    Formatted = True
+    OnSavingProperties = JSONPropStorage1SavingProperties
+    OnRestoreProperties = JSONPropStorage1RestoreProperties
+    Left = 80
+    Top = 48
+  end
 end
