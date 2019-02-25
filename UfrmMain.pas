@@ -50,6 +50,7 @@ type
       );
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure lbGitmojisKeyDown(Sender: TObject; var Key: Word;
@@ -212,6 +213,22 @@ end;
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FGitmojiData);
+end;
+
+procedure TfrmMain.FormShow(Sender: TObject);
+begin
+  Left := Mouse.CursorPos.X - (Width div 2);
+  Top := Mouse.CursorPos.Y - (Height div 2);
+
+  if Left + Width > Screen.Width then
+    Left := Screen.Width - Width
+  else if Left < 0 then
+    Left := 0;
+
+  if Top + Height > Screen.Height then
+    Top := Screen.Height - Height
+  else if Top < 0 then
+    Top := 0;
 end;
 
 procedure TfrmMain.lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
