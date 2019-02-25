@@ -42,6 +42,7 @@ object frmMain: TfrmMain
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 8
     ItemHeight = 48
+    OnDblClick = lbGitmojisDblClick
     OnDrawItem = lbGitmojisDrawItem
     OnKeyDown = lbGitmojisKeyDown
     ScrollWidth = 302

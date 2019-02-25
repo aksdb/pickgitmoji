@@ -60,6 +60,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure JSONPropStorage1RestoreProperties(Sender: TObject);
     procedure JSONPropStorage1SavingProperties(Sender: TObject);
+    procedure lbGitmojisDblClick(Sender: TObject);
     procedure lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure lbGitmojisKeyDown(Sender: TObject; var Key: Word;
@@ -276,6 +277,15 @@ begin
   JSONPropStorage1.StoredValue['CopyEmoji'] := BoolToStr(cbCopyEmoji.Checked, True);
 end;
 
+procedure TfrmMain.lbGitmojisDblClick(Sender: TObject);
+begin
+  if cbCopyEmoji.Checked then
+    Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FEmoji
+  else
+    Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FCode;
+  Hide;
+end;
+
 procedure TfrmMain.lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
 var
@@ -306,11 +316,7 @@ begin
     edSearch.SetFocus
   else if (Key = VK_RETURN) and (lbGitmojis.ItemIndex > -1) then
   begin
-    if cbCopyEmoji.Checked then
-      Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FEmoji
-    else
-      Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FCode;
-    Hide;
+    lbGitmojisDblClick(Sender);
   end;
 end;
 
