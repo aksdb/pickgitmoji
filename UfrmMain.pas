@@ -249,15 +249,15 @@ begin
   Left := Mouse.CursorPos.X - (Width div 2);
   Top := Mouse.CursorPos.Y - (Height div 2);
 
-  if Left + Width > Screen.Width then
-    Left := Screen.Width - Width
-  else if Left < 0 then
-    Left := 0;
+  if Left + Width > Screen.DesktopLeft + Screen.DesktopWidth then
+    Left := Screen.DesktopLeft + Screen.DesktopWidth - Width
+  else if Left < Screen.DesktopLeft then
+    Left := Screen.DesktopLeft;
 
-  if Top + Height > Screen.Height then
-    Top := Screen.Height - Height
-  else if Top < 0 then
-    Top := 0;
+  if Top + Height > Screen.DesktopTop + Screen.DesktopHeight then
+    Top := Screen.DesktopTop + Screen.DesktopHeight - Height
+  else if Top < Screen.DesktopTop then
+    Top := Screen.DesktopTop;
 
   edSearch.Text := '';
   edSearchChange(Sender);
