@@ -1092,4 +1092,9 @@ object frmMain: TfrmMain
     Left = 80
     Top = 48
   end
+  object ApplicationProperties1: TApplicationProperties
+    OnDeactivate = ApplicationProperties1Deactivate
+    Left = 146
+    Top = 119
+  end
 end

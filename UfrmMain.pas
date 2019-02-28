@@ -43,6 +43,7 @@ type
   { TfrmMain }
 
   TfrmMain = class(TForm)
+    ApplicationProperties1: TApplicationProperties;
     cbCopyEmoji: TCheckBox;
     edSearch: TEdit;
     JSONPropStorage1: TJSONPropStorage;
@@ -50,6 +51,7 @@ type
     mnuExit: TMenuItem;
     PopupMenu1: TPopupMenu;
     TrayIcon1: TTrayIcon;
+    procedure ApplicationProperties1Deactivate(Sender: TObject);
     procedure edSearchChange(Sender: TObject);
     procedure edSearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
@@ -211,6 +213,11 @@ begin
     matches.Free;
   end;
   lbGitmojis.Items.EndUpdate;
+end;
+
+procedure TfrmMain.ApplicationProperties1Deactivate(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TfrmMain.edSearchKeyDown(Sender: TObject; var Key: Word;
