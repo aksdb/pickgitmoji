@@ -7,12 +7,14 @@ object frmMain: TfrmMain
   Caption = 'Pick gitmoji'
   ClientHeight = 240
   ClientWidth = 320
+  FormStyle = fsSystemStayOnTop
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
+  ShowInTaskBar = stNever
   object edSearch: TEdit
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner

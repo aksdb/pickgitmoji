@@ -261,6 +261,9 @@ begin
 
   edSearch.Text := '';
   edSearchChange(Sender);
+
+  BringToFront;
+  Activate;
 end;
 
 procedure TfrmMain.JSONPropStorage1RestoreProperties(Sender: TObject);
