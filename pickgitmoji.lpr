@@ -41,6 +41,17 @@ begin
   Done := False;
 end;
 
+procedure RunApp;
+begin
+  RequireDerivedFormResource := True;
+  Application.Scaled := True;
+  Application.ShowMainForm := False;
+  Application.Initialize;
+  Application.CreateForm(TfrmMain, frmMain);
+
+  Application.Run;
+end;
+
 begin
   ipcServer := TSimpleIPCServer.Create(Application);
   ipcServer.ServerID := 'pickgitmoji';
@@ -56,16 +67,11 @@ begin
   end else
   begin
     ipcServer.StartServer(False);
-    RequireDerivedFormResource := True;
-    Application.Scaled := True;
-    Application.ShowMainForm := False;
-    Application.Initialize;
-    Application.CreateForm(TfrmMain, frmMain);
-    Application.AddOnIdleHandler(@msgHandler.Poll, False);
 
+    Application.AddOnIdleHandler(@msgHandler.Poll, False);
     ipcServer.OnMessage := @msgHandler.MessageReceived;
 
-    Application.Run;
+    RunApp;
   end;
 end.
 
