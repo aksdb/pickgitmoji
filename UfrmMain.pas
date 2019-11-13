@@ -48,6 +48,7 @@ type
     edSearch: TEdit;
     JSONPropStorage1: TJSONPropStorage;
     lbGitmojis: TListBox;
+    mnuShow: TMenuItem;
     mnuExit: TMenuItem;
     PopupMenu1: TPopupMenu;
     TrayIcon1: TTrayIcon;
@@ -68,6 +69,7 @@ type
     procedure lbGitmojisKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure mnuExitClick(Sender: TObject);
+    procedure mnuShowClick(Sender: TObject);
     procedure TrayIcon1Click(Sender: TObject);
   private
     FGitmojiData: TGitmojiData;
@@ -333,6 +335,11 @@ end;
 procedure TfrmMain.mnuExitClick(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+procedure TfrmMain.mnuShowClick(Sender: TObject);
+begin
+  Show;
 end;
 
 procedure TfrmMain.TrayIcon1Click(Sender: TObject);

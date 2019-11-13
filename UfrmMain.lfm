@@ -21,7 +21,7 @@ object frmMain: TfrmMain
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 8
-    Height = 29
+    Height = 32
     Top = 8
     Width = 304
     Anchors = [akTop, akLeft, akRight]
@@ -38,8 +38,8 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = cbCopyEmoji
     Left = 8
-    Height = 156
-    Top = 45
+    Height = 154
+    Top = 48
     Width = 304
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 8
@@ -47,19 +47,17 @@ object frmMain: TfrmMain
     OnDblClick = lbGitmojisDblClick
     OnDrawItem = lbGitmojisDrawItem
     OnKeyDown = lbGitmojisKeyDown
-    ScrollWidth = 302
     Style = lbOwnerDrawFixed
     TabOrder = 1
-    TopIndex = -1
   end
   object cbCopyEmoji: TCheckBox
     AnchorSideLeft.Control = edSearch
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 8
-    Height = 23
-    Top = 209
-    Width = 196
+    Height = 22
+    Top = 210
+    Width = 201
     Anchors = [akLeft, akBottom]
     BorderSpacing.Bottom = 8
     Caption = 'Copy &emoji (instead of code)'
@@ -1067,6 +1065,10 @@ object frmMain: TfrmMain
   object PopupMenu1: TPopupMenu
     Left = 224
     Top = 112
+    object mnuShow: TMenuItem
+      Caption = '&Show'
+      OnClick = mnuShowClick
+    end
     object mnuExit: TMenuItem
       Caption = 'E&xit'
       OnClick = mnuExitClick
@@ -1094,7 +1096,7 @@ object frmMain: TfrmMain
   end
   object ApplicationProperties1: TApplicationProperties
     OnDeactivate = ApplicationProperties1Deactivate
-    Left = 146
-    Top = 119
+    Left = 80
+    Top = 120
   end
 end
