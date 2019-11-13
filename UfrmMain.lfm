@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Height = 240
   Top = 250
   Width = 320
-  BorderStyle = bsToolWindow
+  BorderIcons = [biSystemMenu]
   Caption = 'Pick gitmoji'
   ClientHeight = 240
   ClientWidth = 320
