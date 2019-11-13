@@ -155,6 +155,10 @@ begin
   FIconSize := DetermineFontSize(lbGitmojis.Canvas, lbGitmojis.ItemHeight);
   FBigSize := DetermineFontSize(lbGitmojis.Canvas, lbGitmojis.ItemHeight div 2);
   FSmallSize := DetermineFontSize(lbGitmojis.Canvas, lbGitmojis.ItemHeight div 3);
+
+  {$IFDEF WithTrayIcon}
+  TrayIcon1.Visible := True;
+  {$ENDIF WithTrayIcon}
 end;
 
 type
@@ -235,7 +239,9 @@ end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
+  {$IFDEF WithTrayIcon}
   CloseAction := caHide;
+  {$ENDIF}
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -295,7 +301,7 @@ begin
     Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FEmoji
   else
     Clipboard.AsText := TGitmoji(lbGitmojis.Items.Objects[lbGitmojis.ItemIndex]).FCode;
-  Hide;
+  Close;
 end;
 
 procedure TfrmMain.lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
@@ -345,7 +351,7 @@ end;
 procedure TfrmMain.TrayIcon1Click(Sender: TObject);
 begin
   if Visible then
-    Hide
+    Close
   else
     Show;
 end;

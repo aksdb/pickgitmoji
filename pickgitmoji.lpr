@@ -8,11 +8,15 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, UfrmMain,
-  Classes, simpleipc
+  {$IFDEF WithTrayIcon}
+  simpleipc,
+  {$ENDIF WithTrayIcon}
+  Classes
   { you can add units after this };
 
 {$R *.res}
 
+{$IFDEF WithTrayIcon}
 type
 
   { TMessageHandler }
@@ -40,12 +44,12 @@ begin
   repeat until not ipcServer.PeekMessage(1, True);
   Done := False;
 end;
+{$ENDIF WithTrayIcon}
 
 procedure RunApp;
 begin
   RequireDerivedFormResource := True;
   Application.Scaled := True;
-  Application.ShowMainForm := False;
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
 
@@ -53,6 +57,8 @@ begin
 end;
 
 begin
+  Application.Scaled := True;
+  {$IFDEF WithTrayIcon}
   ipcServer := TSimpleIPCServer.Create(Application);
   ipcServer.ServerID := 'pickgitmoji';
   ipcServer.Global := True;
@@ -71,7 +77,11 @@ begin
     Application.AddOnIdleHandler(@msgHandler.Poll, False);
     ipcServer.OnMessage := @msgHandler.MessageReceived;
 
+    Application.ShowMainForm := False;
     RunApp;
   end;
+  {$ELSE WithTrayIcon}
+  RunApp;
+  {$ENDIF WithTrayIcon}
 end.
 

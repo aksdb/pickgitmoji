@@ -1057,7 +1057,6 @@ object frmMain: TfrmMain
       E559408A81A38C5D1134FF3FEA52A1CA8BDDD5080000000049454E44AE426082
     }
     Hint = 'Pick Gitmoji'
-    Visible = True
     OnClick = TrayIcon1Click
     Left = 224
     Top = 56
