@@ -315,22 +315,26 @@ procedure TfrmMain.lbGitmojisDrawItem(Control: TWinControl; Index: Integer;
   ARect: TRect; State: TOwnerDrawState);
 var
   gitmoji: TGitmoji;
+  textStyle: TTextStyle;
 begin
   if Index > -1 then
   begin
     gitmoji := TGitmoji(lbGitmojis.Items.Objects[Index]);
 
+    textStyle := lbGitmojis.Canvas.TextStyle;
+    textStyle.Opaque := True;
+
     lbGitmojis.Canvas.Font.Size := FIconSize;
     lbGitmojis.Canvas.Font.Style := [];
-    lbGitmojis.Canvas.TextRect(ARect, ARect.Left, arect.top, gitmoji.FEmoji);
+    lbGitmojis.Canvas.TextRect(ARect, ARect.Left, arect.top, gitmoji.FEmoji, textStyle);
 
     lbGitmojis.Canvas.Font.Size := FBigSize;
     lbGitmojis.Canvas.Font.Style := [fsBold];
-    lbGitmojis.Canvas.TextRect(ARect, ARect.Left + lbGitmojis.ItemHeight + 8, ARect.Top, gitmoji.code);
+    lbGitmojis.Canvas.TextRect(ARect, ARect.Left + lbGitmojis.ItemHeight + 8, ARect.Top, gitmoji.code, textStyle);
 
     lbGitmojis.Canvas.Font.Size := FSmallSize;
     lbGitmojis.Canvas.Font.Style := [];
-    lbGitmojis.Canvas.TextRect(ARect, ARect.Left + lbGitmojis.ItemHeight + 8, ARect.Top + lbGitmojis.ItemHeight div 2, gitmoji.FDescription);
+    lbGitmojis.Canvas.TextRect(ARect, ARect.Left + lbGitmojis.ItemHeight + 8, ARect.Top + lbGitmojis.ItemHeight div 2, gitmoji.FDescription, textStyle);
   end;
 end;
 
