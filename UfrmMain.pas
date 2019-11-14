@@ -92,7 +92,7 @@ implementation
 {$R *.lfm}
 
 uses
-  fpjson, jsonparser, fpjsonrtti, LCLType, Clipbrd;
+  fpjson, jsonparser, jsonscanner, fpjsonrtti, LCLType, Clipbrd;
 
 { TGitmojiData }
 
@@ -130,7 +130,7 @@ begin
 
   try
     fs := TResourceStream.Create(HINSTANCE, 'GITMOJIS', RT_RCDATA);
-    parser := TJSONParser.Create(fs);
+    parser := TJSONParser.Create(fs, DefaultOptions);
     jsondata := parser.Parse;
     destreamer := TJSONDeStreamer.Create(nil);
     FGitmojiData := TGitmojiData.Create;
