@@ -1,5 +1,5 @@
 object frmMain: TfrmMain
-  Left = 1530
+  Left = 1652
   Height = 240
   Top = 250
   Width = 320
@@ -15,13 +15,14 @@ object frmMain: TfrmMain
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ShowInTaskBar = stNever
+  LCLVersion = '2.1.0.0'
   object edSearch: TEdit
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 8
-    Height = 32
+    Height = 30
     Top = 8
     Width = 304
     Anchors = [akTop, akLeft, akRight]
@@ -38,8 +39,8 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = cbCopyEmoji
     Left = 8
-    Height = 154
-    Top = 48
+    Height = 158
+    Top = 46
     Width = 304
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 8
@@ -55,9 +56,9 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 8
-    Height = 22
-    Top = 210
-    Width = 201
+    Height = 20
+    Top = 212
+    Width = 189
     Anchors = [akLeft, akBottom]
     BorderSpacing.Bottom = 8
     Caption = 'Copy &emoji (instead of code)'

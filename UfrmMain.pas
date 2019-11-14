@@ -118,9 +118,15 @@ var
   destreamer: TJSONDeStreamer;
   gitmoji: TGitmoji;
   i, j, off: Integer;
-  tags1, tags2: array of string;
+  tags1, tags2: array of String;
+  configDir: String;
 begin
   JSONPropStorage1.JSONFileName := GetAppConfigFile(False);
+  configDir := ExtractFilePath(JSONPropStorage1.JSONFileName);
+  if not DirectoryExists(configDir) then
+  begin
+    ForceDirectories(configDir);
+  end;
 
   try
     fs := TResourceStream.Create(HINSTANCE, 'GITMOJIS', RT_RCDATA);
