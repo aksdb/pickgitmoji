@@ -367,21 +367,21 @@ function TfrmMain.DetermineFontSize(ACanvas: TCanvas; AHeight: Integer): Integer
 var
   currentHeight: Integer;
 begin
-  currentHeight := Canvas.TextHeight('M');
+  currentHeight := ACanvas.TextHeight('M');
   if currentHeight < AHeight then
     repeat
-      Result := Canvas.Font.Size;
-      Canvas.Font.Size := Canvas.Font.Size + 1;
-      currentHeight := Canvas.TextHeight('M');
+      Result := ACanvas.Font.Size;
+      ACanvas.Font.Size := ACanvas.Font.Size + 1;
+      currentHeight := ACanvas.TextHeight('M');
     until currentHeight > AHeight
   else if currentHeight > AHeight then
     repeat
-      Result := Canvas.Font.Size;
-      Canvas.Font.Size := Canvas.Font.Size - 1;
-      currentHeight := Canvas.TextHeight('M');
+      Result := ACanvas.Font.Size;
+      ACanvas.Font.Size := ACanvas.Font.Size - 1;
+      currentHeight := ACanvas.TextHeight('M');
     until currentHeight < AHeight
   else
-    Result := Canvas.Font.Size;
+    Result := ACanvas.Font.Size;
 end;
 
 end.
