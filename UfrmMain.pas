@@ -238,7 +238,8 @@ begin
   if Key = VK_DOWN then
   begin
     lbGitmojis.SetFocus;
-    lbGitmojis.ItemIndex := 0;
+    if lbGitmojis.Items.Count > 0 then
+      lbGitmojis.ItemIndex := 0;
     Key := 0;
   end;
 end;
